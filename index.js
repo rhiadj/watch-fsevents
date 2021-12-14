@@ -1,6 +1,9 @@
+var path = require("path");
+
 const fsevents = require('fsevents');
 
-const watchDir = "/Users/Shared/Stuff/Personal/Work/JPMC/Development/jpmlabs-ui-multiplatform/build/";
+const scriptArgs = process.argv.slice(2);
+const watchDir = path.resolve(scriptArgs[0] || __dirname) + '/';
 
 console.log(`Watching ${watchDir}\n`);
 
