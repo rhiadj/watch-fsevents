@@ -5,9 +5,10 @@ const fsevents = require('fsevents');
 const scriptArgs = process.argv.slice(2);
 const watchDir = path.resolve(scriptArgs[0] || __dirname) + '/';
 
-console.log(`Watching ${watchDir}\n`);
+console.log(`Watching ${watchDir}\n\n`);
 
 // To start observation
+let spacerTimeout;
 const stop = fsevents.watch(watchDir, (watchPath, flags, id) => {
   const info = fsevents.getInfo(watchPath, flags, id);
   let { path, event, type, changes: { inode } } = info;
@@ -27,6 +28,11 @@ const stop = fsevents.watch(watchDir, (watchPath, flags, id) => {
   }
   
   console.log(`${event} ${type} : ${path}`);
+  
+  clearTimeout(spacerTimeout);
+  spacerTimeout = setTimeout(() => {
+  	console.log("\n\n");
+  }, 1000);
 });
 
 // To end observation - run for x mins
