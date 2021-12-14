@@ -20,7 +20,7 @@ const stop = fsevents.watch(watchDir, (watchPath, flags, id) => {
   }
   
   if (inode && event === 'created') {
-  	event = 'changed';
+    event = 'changed';
   }
   
   console.log(`${event} ${type} : ${path}`);
@@ -30,5 +30,5 @@ const stop = fsevents.watch(watchDir, (watchPath, flags, id) => {
 const runForMins = 30;
 const runForTimeout = runForMins * 60 * 1000;
 setTimeout(() => {
-	stop();
+  stop();
 }, runForTimeout);
